@@ -1,0 +1,18 @@
+services:
+  iso-downloads:
+    build: .
+    container_name: futura-iso-downloads
+    restart: unless-stopped
+    environment:
+      ISO_DIRECTORY: /srv/isos
+    volumes:
+      - /opt/iso:/srv/isos:ro
+    networks:
+      proxy:
+        aliases:
+          - futura-iso
+
+networks:
+  proxy:
+    external: true
+    name: proxy
